@@ -1,5 +1,3 @@
-import { MovieType } from "../_components/Card";
-
 export type MovieType = {
   adult: boolean;
   backdrop_path: string;
@@ -13,4 +11,5 @@ export type MovieType = {
   video: boolean;
   vote_average: number;
   vote_count: number;
+  id: number;
 };

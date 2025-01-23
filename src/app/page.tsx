@@ -1,5 +1,12 @@
 import { MovieType } from "./util/types";
 import { TOKEN } from "./util/constant";
+import { MovieCard } from "./_components/MovieCard";
+import { Button } from "@/components/ui/button";
+import { useTheme } from "next-themes";
+import { Moon, Sun } from "lucide-react";
+import { Header } from "./_components/Header";
+import { UpcomingSee } from "./_components/UpcomingSee";
+import { MovieCarousel } from "./_components/MovieCarousel";
 
 export default async function Home() {
   const asd = await fetch(
@@ -12,25 +19,18 @@ export default async function Home() {
     }
   );
   const data = await asd.json();
-  console.log(data);
-
+  // console.log(data);
+  // const { setTheme } = useTheme();
   return (
-    <div className="grid grid-cols-5 gap-8 rounded-lg px-8">
-      {data.results.map((movie: MovieType, index: number) => {
-        return (
-          <div className=" w-[100%] " key={index}>
-            <img
-              className="w-[100%]"
-              src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-              alt=""
-            />
-            <div className=" p-5">
-              <p>⭐️ {movie.vote_average}</p>
-              <p>{movie.original_title}</p>
-            </div>
-          </div>
-        );
-      })}
+    <div>
+      <Header />
+      <MovieCarousel movies={data?.results} />
+      <UpcomingSee />
+      <div className="grid grid-cols-5 gap-8 rounded-lg px-8">
+        {data.results.map((movie: MovieType, index: number) => {
+          return <MovieCard movie={movie} key={index} />;
+        })}
+      </div>
     </div>
   );
 }
