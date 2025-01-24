@@ -29,7 +29,10 @@ export function MovieCarousel({ movies }: { movies: MovieType[] }) {
       <CarouselContent className="">
         {movies?.slice(0, 10).map((movie) => {
           return (
-            <CarouselItem className=" w-[100%] h-[100%] " key={movie.id}>
+            <CarouselItem
+              className=" w-[100%] h-[100%] relative"
+              key={movie.id}
+            >
               <Image
                 width={1000}
                 height={1000}
@@ -41,10 +44,14 @@ export function MovieCarousel({ movies }: { movies: MovieType[] }) {
                 }
                 alt=""
               />
+              <WatchTrailer
+                title={movie.title}
+                vote_average={movie.vote_average}
+                overview={movie.overview}
+              />
             </CarouselItem>
           );
         })}
-        <WatchTrailer />
       </CarouselContent>
       <CarouselPrevious className="absolute top-1/2 translate-y-1/2 left-11" />
       <CarouselNext className="absolute top-1/2 translate-y-1/2 right-11" />
