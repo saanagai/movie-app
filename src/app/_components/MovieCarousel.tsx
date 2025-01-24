@@ -12,6 +12,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import Image from "next/image";
+import { WatchTrailer } from "./WatchTrailer";
 
 export function MovieCarousel({ movies }: { movies: MovieType[] }) {
   const plugin = React.useRef(
@@ -21,39 +22,32 @@ export function MovieCarousel({ movies }: { movies: MovieType[] }) {
   return (
     <Carousel
       plugins={[plugin.current]}
-      className="w-full max-w-xs"
+      className="m-auto mt-10"
       onMouseEnter={plugin.current.stop}
       onMouseLeave={plugin.current.reset}
     >
-      <CarouselContent>
-        <CarouselItem>
-          {movies?.slice(0, 10).map(() => {
-            return (
-              <div className="w-[100%]">
-                <Image
-                  width={1000}
-                  height={1000}
-                  src={`https://image.tmdb.org/t/p/"+ "original" +${movies[0]?.backdrop_path}`}
-                  alt=""
-                />
-              </div>
-            );
-          })}
-        </CarouselItem>
-        {/* {Array.from({ length: 6 }).map((_, index) => (
-          <CarouselItem key={index}>
-            <div className="p-1">
-              <Card>
-                <CardContent className="flex aspect-square items-center justify-center p-6">
-                  <span className="text-4xl font-semibold">{index + 1}</span>
-                </CardContent>
-              </Card>
-            </div>
-          </CarouselItem>
-        ))} */}
+      <CarouselContent className="">
+        {movies?.slice(0, 10).map((movie) => {
+          return (
+            <CarouselItem className=" w-[100%] h-[100%] " key={movie.id}>
+              <Image
+                width={1000}
+                height={1000}
+                className="w-[100%] h-[600px]"
+                src={
+                  `https://image.tmdb.org/t/p/` +
+                  "original" +
+                  `${movie?.backdrop_path}`
+                }
+                alt=""
+              />
+            </CarouselItem>
+          );
+        })}
+        <WatchTrailer />
       </CarouselContent>
-      <CarouselPrevious />
-      <CarouselNext />
+      <CarouselPrevious className="absolute top-1/2 translate-y-1/2 left-11" />
+      <CarouselNext className="absolute top-1/2 translate-y-1/2 right-11" />
     </Carousel>
   );
 }

@@ -7,6 +7,7 @@ import { Moon, Sun } from "lucide-react";
 import { Header } from "./_components/Header";
 import { UpcomingSee } from "./_components/UpcomingSee";
 import { MovieCarousel } from "./_components/MovieCarousel";
+import { FooterContent } from "./_components/FooterContent";
 
 export default async function Home() {
   const asd = await fetch(
@@ -26,11 +27,12 @@ export default async function Home() {
       <Header />
       <MovieCarousel movies={data?.results} />
       <UpcomingSee />
-      <div className="grid grid-cols-5 gap-8 rounded-lg px-8">
+      <div className="grid grid-cols-5 gap-8 rounded-lg px-8 mt-10 mb-20">
         {data.results.map((movie: MovieType, index: number) => {
           return <MovieCard movie={movie} key={index} />;
         })}
       </div>
+      <FooterContent />
     </div>
   );
 }
