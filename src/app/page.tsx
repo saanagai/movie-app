@@ -8,30 +8,29 @@ import { Header } from "./_components/Header";
 import { UpcomingSee } from "./_components/UpcomingSee";
 import { MovieCarousel } from "./_components/MovieCarousel";
 import { FooterContent } from "./_components/FooterContent";
+import { Popular } from "./_components/Popular";
+import { TopRated } from "./_components/TopRated";
 
 export default async function Home() {
-  const asd = await fetch(
-    "https://api.themoviedb.org/3/movie/popular?language=enUS&page=1",
-    {
-      headers: {
-        Authorization: `Bearer ${TOKEN}`,
-        "Content-Type": "application/json",
-      },
-    }
-  );
-  const data = await asd.json();
+  // const asd = await fetch(
+  //   "https://api.themoviedb.org/3/movie/popular?language=enUS&page=1",
+  //   {
+  //     headers: {
+  //       Authorization: `Bearer ${TOKEN}`,
+  //       "Content-Type": "application/json",
+  //     },
+  //   }
+  // );
+  // const data = await asd.json();
   // console.log(data);
   // const { setTheme } = useTheme();
   return (
     <div>
       <Header />
-      <MovieCarousel movies={data?.results} />
+      <MovieCarousel />
       <UpcomingSee />
-      <div className="grid grid-cols-5 gap-8 rounded-lg px-8 mt-10 mb-20">
-        {data.results.map((movie: MovieType, index: number) => {
-          return <MovieCard movie={movie} key={index} />;
-        })}
-      </div>
+      <Popular />
+      <TopRated />
       <FooterContent />
     </div>
   );

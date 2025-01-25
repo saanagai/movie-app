@@ -2,6 +2,7 @@
 import * as React from "react";
 import Autoplay from "embla-carousel-autoplay";
 import { MovieType } from "../util/types";
+import { useEffect } from "react";
 
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -13,21 +14,27 @@ import {
 } from "@/components/ui/carousel";
 import Image from "next/image";
 import { WatchTrailer } from "./WatchTrailer";
+import { TOKEN } from "../util/constant";
 
-export function MovieCarousel({ movies }: { movies: MovieType[] }) {
-  const plugin = React.useRef(
-    Autoplay({ delay: 2000, stopOnInteraction: true })
+export async function MovieCarousel() {
+  const asd = await fetch(
+    "https://api.themoviedb.org/3/movie/popular?language=enUS&page=1",
+    {
+      headers: {
+        Authorization: `Bearer ${TOKEN}`,
+        "Content-Type": "application/json",
+      },
+    }
   );
+  const data = await asd.json();
+  // const plugin = React.useRef(
+  //   Autoplay({ delay: 2000, stopOnInteraction: true })
+  // );
 
   return (
-    <Carousel
-      plugins={[plugin.current]}
-      className="m-auto mt-10"
-      onMouseEnter={plugin.current.stop}
-      onMouseLeave={plugin.current.reset}
-    >
+    <Carousel>
       <CarouselContent className="">
-        {movies?.slice(0, 10).map((movie) => {
+        {movies.slice(0, 10).map((movie) => {
           return (
             <CarouselItem
               className=" w-[100%] h-[100%] relative"
