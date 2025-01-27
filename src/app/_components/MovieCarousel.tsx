@@ -1,4 +1,3 @@
-"use client";
 import * as React from "react";
 import Autoplay from "embla-carousel-autoplay";
 import { MovieType } from "../util/types";
@@ -30,11 +29,11 @@ export async function MovieCarousel() {
   // const plugin = React.useRef(
   //   Autoplay({ delay: 2000, stopOnInteraction: true })
   // );
-
+  console.log(data);
   return (
     <Carousel>
-      <CarouselContent className="">
-        {movies.slice(0, 10).map((movie) => {
+      <CarouselContent>
+        {data.results.slice(0, 10).map((movie: MovieType) => {
           return (
             <CarouselItem
               className=" w-[100%] h-[100%] relative"
