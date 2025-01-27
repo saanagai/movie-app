@@ -26,12 +26,12 @@ export default async function Home() {
   // const { setTheme } = useTheme();
   return (
     <div>
-      <Header />
+      {/* <Header /> */}
       <MovieCarousel />
       <UpcomingSee />
       <Popular />
       <TopRated />
-      <FooterContent />
+      {/* <FooterContent /> */}
     </div>
   );
 }

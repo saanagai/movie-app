@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 
 export function Header() {
   return (
-    <div className="flex justify-between">
+    <div className="flex justify-between mt-10 mb-10">
       <Image
         className="w-[90px] h-[25px]"
         width={1000}
@@ -15,10 +15,9 @@ export function Header() {
         src="/logoLight.png"
         alt=""
       />
-      <Genre />
-      <div>
+      <div className="flex gap-3">
+        <Genre />
         <Input />
-        <Search />
       </div>
       <ModeToggle />
     </div>

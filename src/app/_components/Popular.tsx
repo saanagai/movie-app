@@ -22,7 +22,11 @@ export async function Popular() {
       </div>
       <div className="grid grid-cols-5 gap-8 rounded-lg px-8 mt-10 mb-20">
         {data.results.map((movie: MovieType, index: number) => {
-          return <MovieCard movie={movie} key={index} />;
+          return (
+            <div>
+              <MovieCard movie={movie} />
+            </div>
+          );
         })}
       </div>
     </div>

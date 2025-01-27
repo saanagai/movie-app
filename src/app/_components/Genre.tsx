@@ -1,6 +1,7 @@
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
@@ -26,23 +27,28 @@ export async function Genre() {
   const movies = data.genres;
 
   return (
-    <div>
+    <div className="flex justify-evenly">
       <DropdownMenu>
-        <DropdownMenuTrigger>
-          <ChevronDown />
+        <DropdownMenuTrigger className="flex border rounded-[8px] w-[85px] text-[14px]  font-bold justify-center items-center">
+          <ChevronDown className="w-4" />
           Genre
         </DropdownMenuTrigger>
         <DropdownMenuContent>
-          <DropdownMenuLabel>Genres</DropdownMenuLabel>
+          <DropdownMenuLabel>
+            Genres
+            <p>See lists of movies by genre</p>
+          </DropdownMenuLabel>
           <DropdownMenuSeparator />
-          {movies.map((data: genreType, index: number) => {
-            return (
-              <DropdownMenuItem>
-                {data?.name}
-                <ChevronRight />
-              </DropdownMenuItem>
-            );
-          })}
+          <div className="w-[550px] flex flex-wrap gap-5 p-5">
+            {movies.map((data: genreType, index: number) => {
+              return (
+                <DropdownMenuItem className=" border-[1px] rounded-full h-[20px]">
+                  {data?.name}
+                  <ChevronRight />
+                </DropdownMenuItem>
+              );
+            })}
+          </div>
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
