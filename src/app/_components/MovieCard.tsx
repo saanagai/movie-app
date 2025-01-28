@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export const MovieCard = ({ movie }: { movie: MovieType }) => {
   return (
-    <Link href={`/Router/${movie.id}`} key={movie.id}>
+    <Link href={`/details/${movie.id}`} key={movie.id}>
       <div className="h-[450px] w-[230px] bg-slate-100 rounded-md overflow-hidden">
         <Image
           width={1000}
