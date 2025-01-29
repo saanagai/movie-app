@@ -1,10 +1,17 @@
 import { TOKEN } from "@/app/util/constant";
 import { createdType } from "@/app/util/createdType";
 import { genreType } from "@/app/util/genreType";
+import { Trailer } from "@/app/util/trailerType";
 import { MovieType } from "@/app/util/types";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import {
+  ArrowRight,
+  ChevronsRightIcon,
+  LucideSquareChevronUp,
+} from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default async function page1({
   params: { movieId },
@@ -47,61 +54,116 @@ export default async function page1({
       },
     }
   );
+  const trailerData = await fetch(
+    `https://api.themoviedb.org/3/movie/${movieId}/videos?language=en-US`,
+    {
+      headers: {
+        Authorization: `Bearer ${TOKEN}`,
+        "Content-Type": "application/json",
+      },
+    }
+  );
 
   const data = await response.json();
-  // console.log(data);
+  console.log(data);
   const dataStar = await responseStar.json();
-  console.log(dataStar);
+  // console.log(dataStar);
   const dataVideos = await responseVideos.json();
-  console.log(dataVideos);
+  // console.log(dataVideos);
   const dataSimilar = await similarData.json();
   // console.log(similarData);
+
+  // const similarData = await similarResponse.json();
+  // console.log(trailer);
+  // const trailerWeNeed = trailer.results.find((video: Trailer) => {
+  //   return video.type === "Trailer";
+  // });
+  // console.log(trailerWeNeed);
+  const trailer = await trailerData.json();
+  console.log(trailer);
+
+  const trailerUse = trailer.results.find((video: Trailer) => {
+    return video.type === "Trailer";
+  });
+  console.log(trailerData);
+  const durationHour = data.runtime / 60;
+  const durition = data.runtime % 60;
+  const voteCount = data.vote_count / 1000;
+
   return (
     <div className="max-w-[1280px] m-auto">
       <div>
-        <h1 className="text-[36px] font-bold">{data.original_title}</h1>
-        <h2 className="text-[14px]">{data.release_date}</h2>
-        {/* <p>{}</p> */}
-        <Image
-          width={1000}
-          height={1000}
-          src={"https://image.tmdb.org/t/p/w500" + data.poster_path}
-          alt=""
-          className="w-[290px] h-[428px] rounded-sm"
-        />
-        <div className="flex flex-col  gap-[5px]">
-          <p className="flex gap-3">
+        <div>
+          <h1 className="text-[36px] font-bold">{data.original_title}</h1>
+          <h2 className="text-[14px]">{data.release_date}</h2>
+        </div>
+        <div className=" p-5">{/* <p>⭐️ {movie?.vote_average}</p> */}</div>
+        <div className="flex gap-2 mb-5">
+          <Image
+            width={1000}
+            height={1000}
+            src={"https://image.tmdb.org/t/p/w500" + data.poster_path}
+            alt=""
+            className="w-[290px] h-[428px] rounded-sm"
+          />
+          <div>
+            <iframe
+              width="760"
+              height="428"
+              src={`https://www.youtube.com/embed/${trailer.results.key}`}
+            ></iframe>
+          </div>
+        </div>
+        <div className="flex flex-col  gap-2">
+          <div className="flex gap-3  ">
             {data.genres.map((genre: genreType, id: number) => {
-              return <div>{genre.name}</div>;
+              return (
+                <div className="border-[1px] rounded-lg border-spacing-1 text-[12px]  font-bold p-1">
+                  {genre.name}
+                </div>
+              );
             })}
-          </p>
-
+          </div>
           <p className="text-[16px]">{data.overview}</p>
           <h2 className="border-b-[1px] text-[16px] font-bold">Director:</h2>
-          <p className=" flex border-b-[1px] text-[16px] font-bold">
-            Stars:
+          <div className=" flex border-b-[1px] text-[16px] font-bold">
             {dataStar.cast.slice(0, 1).map((movie: createdType, id: number) => {
               return <div>{movie.original_name}</div>;
             })}
-          </p>
+          </div>
+          <div>
+            <h2 className="border-b-[1px] text-[16px] flex gap-16">
+              <p className="text-[16px] w-[64px] font-bold"> Writers</p>
+              {dataStar.crew
+                .slice(0, 1)
+                .map((movie: createdType, id: number) => {
+                  return <div>{movie.original_name}</div>;
+                })}
+            </h2>
+          </div>
+          <div>
+            <h2 className="border-b-[1px] text-[16px]  flex gap-16">
+              <p className="w-[64px] font-bold">Stars</p>
+              {dataStar.cast
+                .slice(0, 5)
+                .map((movie: createdType, id: number) => {
+                  return <div>·{movie.original_name}</div>;
+                })}
+            </h2>
+          </div>
         </div>
-        <div>
-          <h2 className="border-b-[1px] text-[16px] flex gap-16">
-            <p className="text-[16px] w-[64px] font-bold"> Writers</p>
-            {dataStar.crew.slice(0, 1).map((movie: createdType, id: number) => {
-              return <div>{movie.original_name}</div>;
-            })}
-          </h2>
+        <div className="flex justify-between mt-5">
+          <h3 className="text-foreground text-2xl font-semibold">
+            More this like
+          </h3>
+          <Link href={`/${movieId}/similar`}>
+            <button className="inline-flex ">
+              See more
+              <ArrowRight />
+            </button>
+          </Link>
         </div>
-        <div>
-          <h2 className="border-b-[1px] text-[16px]  flex gap-16">
-            <p className="w-[64px] font-bold">Stars</p>
-            {dataStar.cast.slice(0, 5).map((movie: createdType, id: number) => {
-              return <div>·{movie.original_name}</div>;
-            })}
-          </h2>
-        </div>
-        <div className="flex gap-8 mt-20 mb-20">
+        <div className="flex gap-5 mt-10 mb-20 overflow-hidden">
           {dataSimilar.results
             .slice(0, 5)
             .map((movie: MovieType, id: number) => {

@@ -2,7 +2,7 @@ export function FooterContent() {
   return (
     <div className="bg-[#4338CA] w-[100%] h-[280px]  text-white flex justify-between  gap-10 pt-20">
       <div className="">
-        <img src="./logoDark.png" alt="" />
+        <img src="/logoDark.png" alt="" />
         <p>© 2024 Movie Z. All Rights Reserved.</p>
       </div>
       <div>
