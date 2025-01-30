@@ -5,13 +5,17 @@ import { Trailer } from "@/app/util/trailerType";
 import { MovieType } from "@/app/util/types";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import {
-  ArrowRight,
-  ChevronsRightIcon,
-  LucideSquareChevronUp,
-} from "lucide-react";
+import { ArrowRight, PlayIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 export default async function page1({
   params: { movieId },
@@ -106,13 +110,32 @@ export default async function page1({
             alt=""
             className="w-[290px] h-[428px] rounded-sm"
           />
-          <div>
-            <iframe
-              width="760"
-              height="428"
-              src={`https://www.youtube.com/embed/${trailer.results.key}`}
-            ></iframe>
-          </div>
+          <Dialog>
+            <div className="relative">
+              <Image
+                className="w-full relative h-[430px] cursor-pointer rounded-lg bg-black opacity-60"
+                width={1000}
+                height={1000}
+                src={`https://image.tmdb.org/t/p/original/${data.backdrop_path}`}
+                alt={data.original_title}
+                priority
+              />
+              <DialogTrigger>
+                <Button variant={"ghost"} className="absolute left-4 bottom-8">
+                  <PlayIcon />
+                  Play trailer
+                </Button>
+              </DialogTrigger>
+            </div>
+            <DialogContent>
+              <iframe
+                width={460}
+                height={300}
+                src={`https://www.youtube.com/embed/${trailerUse.key}`}
+              ></iframe>
+              <DialogTitle>{""}</DialogTitle>
+            </DialogContent>
+          </Dialog>
         </div>
         <div className="flex flex-col  gap-2">
           <div className="flex gap-3  ">
