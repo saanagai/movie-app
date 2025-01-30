@@ -1,9 +1,6 @@
 import * as React from "react";
 import Autoplay from "embla-carousel-autoplay";
 import { MovieType } from "../util/types";
-import { useEffect } from "react";
-
-import { Card, CardContent } from "@/components/ui/card";
 import {
   Carousel,
   CarouselContent,
@@ -14,6 +11,8 @@ import {
 import Image from "next/image";
 import { WatchTrailer } from "./WatchTrailer";
 import { TOKEN } from "../util/constant";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 export async function MovieCarousel() {
   const asd = await fetch(
@@ -50,11 +49,15 @@ export async function MovieCarousel() {
                 }
                 alt=""
               />
-              <WatchTrailer
-                title={movie.title}
-                vote_average={movie.vote_average}
-                overview={movie.overview}
-              />
+              <div className="absolute top-5 left-5 text-white p-5 gap-5">
+                <p className="text-base">Now Playing:</p>
+                <p className="font-bold text-4xl">{movie.title}</p>
+                <p className="text-lg mb-5">⭐️{movie.vote_average}</p>
+                <p className="w-[300px] text-xs mb-5">{movie.overview}</p>
+                <Button variant={"secondary"}>
+                  <WatchTrailer movieId={movie.id} />
+                </Button>
+              </div>
             </CarouselItem>
           );
         })}

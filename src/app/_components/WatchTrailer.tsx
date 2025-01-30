@@ -1,29 +1,41 @@
-"use client";
+import { Play, PlayIcon } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { TOKEN } from "../util/constant";
 
-import { Button } from "@/components/ui/button";
-import { MovieType } from "../util/types";
-import { Play } from "lucide-react";
-
-export function WatchTrailer({
-  title,
-  vote_average,
-  overview,
-}: {
-  title: string;
-  vote_average: number;
-  overview: string;
-}) {
+export async function WatchTrailer({ movieId }: { movieId: number }) {
+  const trailerData = await fetch(
+    `https://api.themoviedb.org/3/movie/${movieId}/videos?language=en-US`,
+    {
+      headers: {
+        Authorization: `Bearer ${TOKEN}`,
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  const trailer = await trailerData.json();
+  console.log(trailer);
   return (
-    <div className="absolute top-5 left-5 text-white p-5 gap-5">
-      <p className="text-base">Now Playing:</p>
-      <p className="font-bold text-4xl">{title}</p>
-      <p className="text-lg mb-5">⭐️{vote_average}</p>
-      <p className="w-[300px] text-xs mb-5">{overview}</p>
-
-      <Button variant={`secondary`}>
-        <Play />
+    <Dialog>
+      <DialogTrigger className="flex">
+        <PlayIcon />
         Watch Trailer
-      </Button>
-    </div>
+      </DialogTrigger>
+      <DialogContent className="">
+        <div>
+          <iframe
+            width="760"
+            height="428"
+            src={`https://www.youtube.com/embed/${trailer.results?.key}`}
+          ></iframe>
+        </div>
+
+        <DialogTitle>Edit profile</DialogTitle>
+      </DialogContent>
+    </Dialog>
   );
 }

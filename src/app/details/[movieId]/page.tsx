@@ -118,7 +118,10 @@ export default async function page1({
           <div className="flex gap-3  ">
             {data.genres.map((genre: genreType, id: number) => {
               return (
-                <div className="border-[1px] rounded-lg border-spacing-1 text-[12px]  font-bold p-1">
+                <div
+                  key={id}
+                  className="border-[1px] rounded-lg border-spacing-1 text-[12px]  font-bold p-1"
+                >
                   {genre.name}
                 </div>
               );
@@ -128,7 +131,7 @@ export default async function page1({
           <h2 className="border-b-[1px] text-[16px] font-bold">Director:</h2>
           <div className=" flex border-b-[1px] text-[16px] font-bold">
             {dataStar.cast.slice(0, 1).map((movie: createdType, id: number) => {
-              return <div>{movie.original_name}</div>;
+              return <div key={id}>{movie.original_name}</div>;
             })}
           </div>
           <div>
@@ -137,7 +140,7 @@ export default async function page1({
               {dataStar.crew
                 .slice(0, 1)
                 .map((movie: createdType, id: number) => {
-                  return <div>{movie.original_name}</div>;
+                  return <div key={id}>{movie.original_name}</div>;
                 })}
             </h2>
           </div>
@@ -147,7 +150,7 @@ export default async function page1({
               {dataStar.cast
                 .slice(0, 5)
                 .map((movie: createdType, id: number) => {
-                  return <div>·{movie.original_name}</div>;
+                  return <div key={id}>·{movie.original_name}</div>;
                 })}
             </h2>
           </div>
@@ -163,12 +166,12 @@ export default async function page1({
             </button>
           </Link>
         </div>
-        <div className="flex gap-5 mt-10 mb-20 overflow-hidden">
+        <div className="flex gap-5 mt-10 mb-20 overflow-hidden w-[1080px]">
           {dataSimilar.results
             .slice(0, 5)
             .map((movie: MovieType, id: number) => {
               return (
-                <Card>
+                <Card key={id}>
                   <div>
                     <div>
                       <Image

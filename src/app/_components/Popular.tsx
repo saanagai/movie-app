@@ -16,7 +16,7 @@ export async function Popular() {
   // console.log(data);
   return (
     <div>
-      <div>
+      <div className="flex justify-between mt-10 mb-20">
         <h3 className="text-foreground text-2xl font-semibold">Popular</h3>
         <button className="inline-flex ">See more</button>
       </div>

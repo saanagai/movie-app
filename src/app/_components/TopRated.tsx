@@ -16,8 +16,10 @@ export async function TopRated() {
   // console.log(data);
   return (
     <div>
-      <h3 className="text-foreground text-2xl font-semibold">Top Rate</h3>
-      <button className="inline-flex ">See more</button>
+      <div className="flex justify-between mt-10 mb-20">
+        <h3 className="text-foreground text-2xl font-semibold">Top Rate</h3>
+        <button className="inline-flex ">See more</button>
+      </div>
       <div className="grid grid-cols-5 gap-8 rounded-lg px-8 mt-10 mb-20">
         {data.results.map((movie: MovieType, index: number) => {
           return <MovieCard movie={movie} key={index} />;
