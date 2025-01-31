@@ -1,6 +1,7 @@
 import { Play, PlayIcon } from "lucide-react";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogTitle,
   DialogTrigger,
@@ -30,16 +31,16 @@ export async function WatchTrailer({ movieId }: { movieId: number }) {
         <PlayIcon />
         Watch Trailer
       </DialogTrigger>
-      <DialogContent className="">
+      <DialogContent className="max-w-xl w-[460px] h-[300px] p-0 border-0">
         <div>
           <iframe
-            width="460"
-            height="300"
+            width="480"
+            height="320"
             src={`https://www.youtube.com/embed/${trailerUse.key}`}
           ></iframe>
         </div>
 
-        {/* <DialogTitle>Edit profile</DialogTitle> */}
+        <DialogTitle className="hidden"></DialogTitle>
       </DialogContent>
     </Dialog>
   );
