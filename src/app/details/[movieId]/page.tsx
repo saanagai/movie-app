@@ -113,7 +113,7 @@ export default async function page1({
           <Dialog>
             <div className="relative">
               <Image
-                className="w-full relative h-[430px] cursor-pointer rounded-lg bg-black opacity-60"
+                className="w-full relative h-[430px] cursor-pointer rounded-lg bg-black "
                 width={1000}
                 height={1000}
                 src={`https://image.tmdb.org/t/p/original/${data.backdrop_path}`}
@@ -180,7 +180,7 @@ export default async function page1({
         </div>
         <div className="flex justify-between mt-5">
           <h3 className="text-foreground text-2xl font-semibold">
-            More this like
+            More like this
           </h3>
           <Link href={`/${movieId}/similar`}>
             <button className="inline-flex ">

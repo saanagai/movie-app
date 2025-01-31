@@ -6,6 +6,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { TOKEN } from "../util/constant";
+import { Trailer } from "../util/trailerType";
 
 export async function WatchTrailer({ movieId }: { movieId: number }) {
   const trailerData = await fetch(
@@ -18,7 +19,11 @@ export async function WatchTrailer({ movieId }: { movieId: number }) {
     }
   );
   const trailer = await trailerData.json();
-  console.log(trailer);
+  // console.log(trailer);
+  const trailerUse = trailer.results.find((video: Trailer) => {
+    return video.type === "Trailer";
+  });
+  console.log(trailerData);
   return (
     <Dialog>
       <DialogTrigger className="flex">
@@ -28,13 +33,13 @@ export async function WatchTrailer({ movieId }: { movieId: number }) {
       <DialogContent className="">
         <div>
           <iframe
-            width="760"
-            height="428"
-            src={`https://www.youtube.com/embed/${trailer.results?.key}`}
+            width="460"
+            height="300"
+            src={`https://www.youtube.com/embed/${trailerUse.key}`}
           ></iframe>
         </div>
 
-        <DialogTitle>Edit profile</DialogTitle>
+        {/* <DialogTitle>Edit profile</DialogTitle> */}
       </DialogContent>
     </Dialog>
   );

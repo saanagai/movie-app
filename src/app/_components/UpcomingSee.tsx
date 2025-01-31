@@ -1,6 +1,8 @@
+import Link from "next/link";
 import { TOKEN } from "../util/constant";
 import { MovieType } from "../util/types";
 import { MovieCard } from "./MovieCard";
+import { ArrowRight } from "lucide-react";
 
 export async function UpcomingSee() {
   const asd = await fetch(
@@ -18,7 +20,11 @@ export async function UpcomingSee() {
     <div>
       <div className="flex justify-between mt-10 mb-20">
         <h3 className="text-foreground text-2xl font-semibold">Upcoming</h3>
-        <button className="inline-flex ">See more</button>
+        <Link href={`/seeMore/upcoming`}>
+          <p>
+            see more <ArrowRight />
+          </p>
+        </Link>
       </div>
       <div className="grid grid-cols-5 gap-8 rounded-lg px-8 mt-10 mb-20">
         {data.results.map((movie: MovieType, index: number) => {
