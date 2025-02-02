@@ -1,4 +1,4 @@
-import { Pagination } from "@/app/_components/Pagination";
+// import { Pagination } from "@/app/_components/Pagination";
 import { TOKEN } from "@/app/util/constant";
 import { MovieType } from "@/app/util/types";
 import Image from "next/image";
@@ -21,6 +21,7 @@ export default async function (props: {
 
   return (
     <div>
+      <p>Upcoming</p>
       <div className="grid grid-cols-5 gap-[32px] max-w-[1440px]">
         {data.results?.slice(0, 20).map((d: MovieType, index: number) => {
           return (
