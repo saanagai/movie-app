@@ -182,7 +182,7 @@ export default async function page1({
           <h3 className="text-foreground text-2xl font-semibold">
             More like this
           </h3>
-          <Link href={`/${movieId}/similar`}>
+          <Link href={`/seeMore/${movieId}/similar`}>
             <button className="inline-flex ">
               See more
               <ArrowRight />

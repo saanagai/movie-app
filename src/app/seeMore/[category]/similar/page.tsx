@@ -1,15 +1,13 @@
-// import { Pagination } from "@/app/_components/Pagination";
 import { TOKEN } from "@/app/util/constant";
 import { MovieType } from "@/app/util/types";
 import Image from "next/image";
 import Link from "next/link";
 
-export default async function (props: {
-  params: Promise<{ category: string }>;
-}) {
+const Page = async (props: { params: Promise<{ category: string }> }) => {
   const { category } = await props.params;
-  const categoryResponse = await fetch(
-    `https://api.themoviedb.org/3/movie/${category}?language=en-US&page=1`,
+  //   /movie/${id}/similar?language=en-US&page=1
+  const response = await fetch(
+    `https://api.themoviedb.org/3/movie/${category}/similar?language=en-US&page=1`,
     {
       headers: {
         Authorization: `Bearer ${TOKEN}`,
@@ -17,11 +15,13 @@ export default async function (props: {
       },
     }
   );
-  const data = await categoryResponse.json();
-
+  const data = await response.json();
+  console.log({ data });
   return (
     <div>
-      <p className="text-foreground text-2xl font-semibold mb-5">{category}</p>
+      <p className="text-foreground text-2xl font-semibold mb-5">
+        More This Like
+      </p>
       <div className="grid grid-cols-5 gap-[32px] max-w-[1440px]">
         {data.results?.slice(0, 20).map((d: MovieType, index: number) => {
           return (
@@ -51,7 +51,7 @@ export default async function (props: {
                   </p>
                 </div>
 
-                <h2 className="flex flex-col gap-6 text-[18px]">
+                <h2 className="flex flex-col gap-6 text-[14px]">
                   {d.original_title}
                 </h2>
               </div>
@@ -62,4 +62,6 @@ export default async function (props: {
       {/* <Pagination /> */}
     </div>
   );
-}
+};
+
+export default Page;

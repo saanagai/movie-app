@@ -17,12 +17,12 @@ export async function Popular() {
   const data = await asd.json();
   // console.log(data);
   return (
-    <div>
+    <div className="w-[1280px] m-auto">
       <div className="flex justify-between mt-10 mb-20">
         <h3 className="text-foreground text-2xl font-semibold">Popular</h3>
         <Link href={`/seeMore/popular`}>
-          <p className="flex">
-            see more <ArrowRight />
+          <p className="flex hover:underline font-bold">
+            See more <ArrowRight />
           </p>
         </Link>
       </div>

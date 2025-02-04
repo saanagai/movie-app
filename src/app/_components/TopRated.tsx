@@ -17,12 +17,12 @@ export async function TopRated() {
   const data = await asd.json();
   // console.log(data);
   return (
-    <div>
+    <div className="w-[1280px] m-auto">
       <div className="flex justify-between mt-10 mb-20">
         <h3 className="text-foreground text-2xl font-semibold">Top Rate</h3>
-        <Link href={`/seeMore/topRate`}>
-          <p className="flex">
-            see more <ArrowRight />
+        <Link href={`/seeMore/top_rated`}>
+          <p className="flex hover:underline font-bold">
+            See more <ArrowRight />
           </p>
         </Link>
       </div>
