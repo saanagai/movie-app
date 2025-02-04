@@ -6,10 +6,11 @@ export type MovieType = {
   overview: string;
   popularity: number;
   poster_path: string;
-  release_data: string;
+  release_date: string;
   title: string;
   video: boolean;
   vote_average: number;
   vote_count: number;
   id: number;
+  key: string;
 };

@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import ThemeChanger from "./ThemeChanger";
+import SearchTyping from "./SearchTyping";
 
 export function Header() {
   return (
@@ -18,7 +19,7 @@ export function Header() {
       </Link>
       <div className="flex gap-3">
         <Genre />
-        <Input />
+        <SearchTyping />
 
         <ThemeChanger />
       </div>

@@ -1,4 +1,6 @@
-import * as React from "react";
+"use client";
+import { useEffect, useState } from "react";
+import React from "react";
 import Autoplay from "embla-carousel-autoplay";
 import { MovieType } from "../util/types";
 import {
@@ -11,28 +13,40 @@ import {
 import Image from "next/image";
 import { WatchTrailer } from "./WatchTrailer";
 import { TOKEN } from "../util/constant";
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
-export async function MovieCarousel() {
-  const asd = await fetch(
-    "https://api.themoviedb.org/3/movie/popular?language=enUS&page=1",
-    {
-      headers: {
-        Authorization: `Bearer ${TOKEN}`,
-        "Content-Type": "application/json",
-      },
-    }
+export function MovieCarousel() {
+  const [data, setData] = useState<MovieType[] | null>(null);
+
+  useEffect(() => {
+    const getData = async () => {
+      const asd = await fetch(
+        "https://api.themoviedb.org/3/movie/popular?language=enUS&page=1",
+        {
+          headers: {
+            Authorization: `Bearer ${TOKEN}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const data = await asd.json();
+      setData(data.results || []);
+    };
+    getData();
+  }, []);
+
+  const plugin = React.useRef(
+    Autoplay({ delay: 2000, stopOnInteraction: true })
   );
-  const data = await asd.json();
-  // const plugin = React.useRef(
-  //   Autoplay({ delay: 2000, stopOnInteraction: true })
-  // );
-  console.log(data);
   return (
-    <Carousel>
+    <Carousel
+      plugins={[plugin.current]}
+      className="w-[100vw]"
+      onMouseEnter={plugin.current.stop}
+      onMouseLeave={plugin.current.reset}
+    >
       <CarouselContent>
-        {data.results.slice(0, 10).map((movie: MovieType) => {
+        {data?.slice(0, 10).map((movie: MovieType) => {
           return (
             <CarouselItem
               className=" w-[100%] h-[100%] relative"

@@ -1,3 +1,4 @@
+"use client";
 import { Play, PlayIcon } from "lucide-react";
 import {
   Dialog,
@@ -8,23 +9,28 @@ import {
 } from "@/components/ui/dialog";
 import { TOKEN } from "../util/constant";
 import { Trailer } from "../util/trailerType";
+import { useEffect, useState } from "react";
+import { MovieType } from "../util/types";
 
-export async function WatchTrailer({ movieId }: { movieId: number }) {
-  const trailerData = await fetch(
-    `https://api.themoviedb.org/3/movie/${movieId}/videos?language=en-US`,
-    {
-      headers: {
-        Authorization: `Bearer ${TOKEN}`,
-        "Content-Type": "application/json",
-      },
-    }
-  );
-  const trailer = await trailerData.json();
-  // console.log(trailer);
-  const trailerUse = trailer.results.find((video: Trailer) => {
-    return video.type === "Trailer";
-  });
-  console.log(trailerData);
+export function WatchTrailer({ movieId }: { movieId: number }) {
+  const [trailer, setTrailer] = useState<Trailer | null>(null);
+  useEffect(() => {
+    const getData = async () => {
+      const trailerData = await fetch(
+        `https://api.themoviedb.org/3/movie/${movieId}/videos?language=en-US`,
+        {
+          headers: {
+            Authorization: `Bearer ${TOKEN}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const trailers = await trailerData.json();
+      setTrailer(trailers.results[0] || []);
+    };
+    getData();
+  }, []);
+
   return (
     <Dialog>
       <DialogTrigger className="flex">
@@ -36,7 +42,7 @@ export async function WatchTrailer({ movieId }: { movieId: number }) {
           <iframe
             width="480"
             height="320"
-            src={`https://www.youtube.com/embed/${trailerUse.key}`}
+            src={`https://www.youtube.com/embed/${trailer?.key}`}
           ></iframe>
         </div>
 

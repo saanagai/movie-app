@@ -6,10 +6,10 @@ import { useTheme } from "next-themes";
 import { Moon, Sun } from "lucide-react";
 import { Header } from "./_components/Header";
 import { UpcomingSee } from "./_components/UpcomingSee";
-import { MovieCarousel } from "./_components/MovieCarousel";
 import { FooterContent } from "./_components/FooterContent";
 import { Popular } from "./_components/Popular";
 import { TopRated } from "./_components/TopRated";
+import { MovieCarousel } from "./_components/MovieCarousel";
 
 export default async function Home() {
   // const asd = await fetch(
