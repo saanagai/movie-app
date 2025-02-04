@@ -21,7 +21,7 @@ export async function UpcomingSee() {
       <div className="flex justify-between mt-10 mb-20">
         <h3 className="text-foreground text-2xl font-semibold">Upcoming</h3>
         <Link href={`/seeMore/upcoming`}>
-          <p>
+          <p className="flex">
             see more <ArrowRight />
           </p>
         </Link>

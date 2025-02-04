@@ -21,7 +21,7 @@ export default async function (props: {
 
   return (
     <div>
-      <p>Upcoming</p>
+      <p className="text-foreground text-2xl font-semibold">Upcoming</p>
       <div className="grid grid-cols-5 gap-[32px] max-w-[1440px]">
         {data.results?.slice(0, 20).map((d: MovieType, index: number) => {
           return (
