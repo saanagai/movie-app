@@ -16,6 +16,7 @@ import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 
 export function Genre() {
   const [movies, setMovies] = useState<genreType[]>();
+  const [active, setActive] = useState(false);
   useEffect(() => {
     const getData = async () => {
       const genre = await fetch(
@@ -37,9 +38,12 @@ export function Genre() {
   // console.log("genre", data);
   const router = useRouter();
 
+  const handleClick = () => {
+    setActive(!active);
+  };
   return (
     <div className="flex">
-      <DropdownMenu>
+      <DropdownMenu open={active} onOpenChange={handleClick}>
         <DropdownMenuTrigger className="flex rounded-full w-[85px] text-[14px] font-bold justify-center items-center">
           <ChevronDown className="w-4" />
           Genre
@@ -57,7 +61,10 @@ export function Genre() {
             {movies?.map((data: genreType, index: number) => {
               return (
                 <ToggleGroupItem
-                  onClick={() => router.push(`/genres?genresId=${data?.id}`)}
+                  onClick={() => {
+                    handleClick();
+                    router.push(`/genres?genresId=${data?.id}`);
+                  }}
                   value={data.id.toString()}
                   key={index}
                   className="rounded-full font-semibold text-[12px]  px-1 border-[1px] flex justify-center items-center mt-[4px] gap-2"

@@ -82,9 +82,9 @@ export default function Page() {
                   <ToggleGroupItem
                     value={data.id.toString()}
                     key={index}
-                    className="rounded-[9px] font-semibold text-[12px]  px-[4px] border-[1px] flex justify-center items-center mt-[4px] gap-2"
+                    className="rounded-full font-semibold text-[12px] h-[20px] px-1 border-[1px] flex justify-center items-center mt-1 gap-2"
                   >
-                    {data.name} <ChevronRight className="w-[16px]" />
+                    {data.name} <ChevronRight />
                   </ToggleGroupItem>
                 );
               })}
