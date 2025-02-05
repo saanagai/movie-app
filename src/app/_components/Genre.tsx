@@ -1,8 +1,7 @@
+"use client";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
@@ -11,25 +10,37 @@ import { ChevronDown, ChevronRight } from "lucide-react";
 import { TOKEN } from "../util/constant";
 import { genreType } from "../util/genreType";
 import { MovieType } from "../util/types";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 
-export async function Genre() {
-  const genre = await fetch(
-    `https://api.themoviedb.org/3/genre/movie/list?language=en`,
-    {
-      headers: {
-        Authorization: `Bearer ${TOKEN}`,
-        "Content-Type": "application/json",
-      },
-    }
-  );
-  const data = await genre.json();
-  console.log(data);
-  const movies = data.genres;
+export function Genre() {
+  const [movies, setMovies] = useState<genreType[]>();
+  useEffect(() => {
+    const getData = async () => {
+      const genre = await fetch(
+        `https://api.themoviedb.org/3/genre/movie/list?language=en`,
+        {
+          headers: {
+            Authorization: `Bearer ${TOKEN}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const data = await genre.json();
+      setMovies(data.genres);
+    };
+    getData();
+  }, []);
+
+  // const movies = data.genres;
+  // console.log("genre", data);
+  const router = useRouter();
 
   return (
-    <div className="flex justify-evenly">
+    <div className="flex">
       <DropdownMenu>
-        <DropdownMenuTrigger className="flex border rounded-[8px] w-[85px] text-[14px]  font-bold justify-center items-center">
+        <DropdownMenuTrigger className="flex rounded-full w-[85px] text-[14px] font-bold justify-center items-center">
           <ChevronDown className="w-4" />
           Genre
         </DropdownMenuTrigger>
@@ -39,16 +50,23 @@ export async function Genre() {
             <p>See lists of movies by genre</p>
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <div className="w-[550px] flex flex-wrap gap-5 p-5">
-            {movies.map((data: genreType, index: number) => {
+          <ToggleGroup
+            type="multiple"
+            className="flex flex-wrap border-t-2 gap-3 pt-[4px] w-[580px] h-[220px]"
+          >
+            {movies?.map((data: genreType, index: number) => {
               return (
-                <DropdownMenuItem className=" border-[1px] rounded-full h-[20px]">
-                  {data?.name}
-                  <ChevronRight />
-                </DropdownMenuItem>
+                <ToggleGroupItem
+                  onClick={() => router.push(`/genres?genresId=${data?.id}`)}
+                  value={data.id.toString()}
+                  key={index}
+                  className="rounded-full font-semibold text-[12px]  px-1 border-[1px] flex justify-center items-center mt-[4px] gap-2"
+                >
+                  {data.name} <ChevronRight />
+                </ToggleGroupItem>
               );
             })}
-          </div>
+          </ToggleGroup>
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
