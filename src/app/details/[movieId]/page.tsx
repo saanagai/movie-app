@@ -120,7 +120,7 @@ export default async function page1({
                 alt={data.original_title}
                 priority
               />
-              <DialogTrigger>
+              <DialogTrigger asChild>
                 <Button variant={"ghost"} className="absolute left-4 bottom-8">
                   <PlayIcon />
                   Play trailer
@@ -131,7 +131,7 @@ export default async function page1({
               <iframe
                 width={460}
                 height={300}
-                src={`https://www.youtube.com/embed/${trailerUse.key}`}
+                src={`https://www.youtube.com/embed/${trailerUse?.key}`}
               ></iframe>
               <DialogTitle>{""}</DialogTitle>
             </DialogContent>

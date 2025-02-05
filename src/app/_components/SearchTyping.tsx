@@ -47,7 +47,7 @@ export default function SearchTyping() {
           placeholder="Search"
           value={search}
           onChange={addHandler}
-          className="w-[355px] h-[38px] rounded-lg py-3 pl-8 focus:outline-hidden flex items-center pt-3"
+          className="w-[355px] h-[38px] rounded-lg py-3 pl-8 focus:outline-hidden flex items-center pt-3 border-[1px]"
         />
       </div>
       {search ? (
@@ -92,7 +92,7 @@ export default function SearchTyping() {
               </div>
             );
           })}
-          <Link href={`/search/${":"}`}>
+          <Link href={`/search`}>
             <Card className="h-[34px] flex items-center justify-center">
               See all results for " search "
             </Card>

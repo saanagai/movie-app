@@ -67,7 +67,7 @@ export function Genre() {
                   }}
                   value={data.id.toString()}
                   key={index}
-                  className="rounded-full font-semibold text-[12px]  px-1 border-[1px] flex justify-center items-center mt-[4px] gap-2"
+                  className="rounded-full font-semibold text-[12px] h- px-1 border-[1px] flex justify-center items-center mt-[4px] gap-2"
                 >
                   {data.name} <ChevronRight />
                 </ToggleGroupItem>
