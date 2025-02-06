@@ -11,6 +11,7 @@ import { TOKEN } from "../util/constant";
 import { Trailer } from "../util/trailerType";
 import { useEffect, useState } from "react";
 import { MovieType } from "../util/types";
+import { Button } from "@/components/ui/button";
 
 export function WatchTrailer({ movieId }: { movieId: number }) {
   const [trailer, setTrailer] = useState<Trailer | null>(null);
@@ -33,9 +34,11 @@ export function WatchTrailer({ movieId }: { movieId: number }) {
 
   return (
     <Dialog>
-      <DialogTrigger className="flex">
-        <PlayIcon />
-        Watch Trailer
+      <DialogTrigger asChild>
+        <Button variant="secondary">
+          <PlayIcon />
+          Watch Trailer
+        </Button>
       </DialogTrigger>
       <DialogContent className="max-w-xl w-[460px] h-[300px] p-0 border-0">
         <div>

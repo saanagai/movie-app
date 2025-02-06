@@ -54,12 +54,12 @@ export default function SearchTyping() {
         <div className="absolute top-[40px] z-10">
           {value.slice(0, 5).map((movie: MovieType, index: number) => {
             return (
-              <div key={index} className="flex flex-col w-full">
+              <div key={index} className=" w-full">
                 <Link
                   href={`/details/${movie.id}`}
                   onClick={() => clickHandler()}
                 >
-                  <Card className="w-[545px] gap-5 p-5 rounded-md hover:bg-secondary  flex justify-start ">
+                  <Card className="w-[545px] gap-5 p-5 rounded-md hover:bg-secondary flex">
                     <img
                       className="w-[76px] h-[100px] rounded-lg"
                       src={
@@ -67,23 +67,15 @@ export default function SearchTyping() {
                         movie?.poster_path
                       }
                     />
-                    <button
-                      className="text-[20px] flex flex-col justify-start w-full"
-                      key={index}
-                    >
-                      {movie?.original_title}
-                      <div className="flex items-center">
-                        <img
-                          className="w-[16px] h-[16px]"
-                          src="/Star.svg"
-                          alt=""
-                        />
-                        {movie.vote_average.toFixed(1)}/10
+                    <button className="  text-[16px] " key={index}>
+                      {movie?.title}
+                      <div className=" text-[14px]">
+                        ⭐️{movie.vote_average.toFixed(1)}/10
                       </div>
-                      <div className="flex justify-between w-full">
+                      <div className=" gap-60 text-[14px]">
                         <div>{movie.release_date}</div>
-                        <div className="flex items-center">
-                          See more <ArrowRight />
+                        <div className="flex justify-center">
+                          See more <ArrowRight className="size-4 " />
                         </div>
                       </div>
                     </button>

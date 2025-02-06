@@ -68,9 +68,7 @@ export function MovieCarousel() {
                 <p className="font-bold text-4xl">{movie.title}</p>
                 <p className="text-lg mb-5">⭐️{movie.vote_average}</p>
                 <p className="w-[300px] text-xs mb-5">{movie.overview}</p>
-                <Button variant={"secondary"}>
-                  <WatchTrailer movieId={movie.id} />
-                </Button>
+                <WatchTrailer movieId={movie.id} />
               </div>
             </CarouselItem>
           );
