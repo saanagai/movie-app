@@ -1,12 +1,12 @@
 import { TOKEN } from "./constant";
 
-export default async function Fetchdata(poin: string) {
-  const repeat = await fetch(`https://api.themoviedb.org/3${poin}`, {
+export async function fetchdata(params: string) {
+  const data = await fetch(`https://api.themoviedb.org/3${params}`, {
     headers: {
       Authorization: `Bearer ${TOKEN}`,
       "Content-Type": "application/json",
     },
   });
-  const repeats = repeat.json();
-  return repeats;
+  const dataJson = data.json();
+  return dataJson;
 }

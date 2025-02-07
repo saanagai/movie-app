@@ -10,30 +10,35 @@ import { ChevronRight } from "lucide-react";
 import { useEffect, useState } from "react";
 import { TOKEN } from "../util/constant";
 import { useRouter } from "next/navigation";
+import { SearchCards } from "../_components/SearchCards";
+import { fetchdata } from "../util/inputData";
 const Page = (props: { params: Promise<{ category: string }> }) => {
   // const { category } = await props.params;
   const searchParams = useSearchParams();
   const search = searchParams.get("value");
+  const page = searchParams.get("page");
 
   // console.log(search);
   const [genres, setGenres] = useState<genreType[]>();
+  const [movies, setMovies] = useState<MovieType[]>([]);
   const [active, setActive] = useState(false);
   useEffect(() => {
-    const getData = async () => {
-      const genre = await fetch(
-        `https://api.themoviedb.org/3/genre/movie/list?language=en`,
-        {
-          headers: {
-            Authorization: `Bearer ${TOKEN}`,
-            "Content-Type": "application/json",
-          },
-        }
+    const getSearchedMovie = async () => {
+      const movieJson = await fetchdata(
+        `/search/movie?query=${search}&language=en-US&page=${page}`
       );
-      const data = await genre.json();
+
+      setMovies(movieJson.results);
+    };
+
+    const getData = async () => {
+      const data = await fetchdata("/genre/movie/list?language=en");
       setGenres(data.genres);
     };
+    getSearchedMovie();
     getData();
   }, []);
+  console.log(movies);
 
   // const movies = data.genres;
   // console.log("genre", data);
@@ -44,15 +49,18 @@ const Page = (props: { params: Promise<{ category: string }> }) => {
   };
 
   return (
-    <div>
-      <Link href={`/search?value`}>
-        <p className="text-foreground text-2xl font-semibold mb-5">
-          Search results
-        </p>
-      </Link>
+    <div className="w-full flex">
       <div>
-        <h4 className="text-[22px] font-semibold">Search by genre</h4>
-        <p>See lists of movies by genre</p>
+        <h2 className="text-foreground text-2xl font-semibold mb-5">
+          Search results
+        </h2>
+        <div>
+          <h4 className="text-[22px] font-semibold">Search by genre</h4>
+          <p>See lists of movies by genre</p>
+        </div>
+        <div className="flex flex-wrap gap-2 w-[1200px]">
+          <SearchCards movies={movies} />
+        </div>
       </div>
       <ToggleGroup
         type="multiple"

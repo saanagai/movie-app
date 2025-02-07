@@ -20,9 +20,8 @@ export function Header() {
       <div className="flex gap-3">
         <Genre />
         <SearchTyping />
-
-        <ThemeChanger />
       </div>
+      <ThemeChanger />
     </div>
   );
 }

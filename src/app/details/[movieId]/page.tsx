@@ -69,7 +69,7 @@ export default async function page1({
   );
 
   const data = await response.json();
-  console.log(data);
+  // console.log(data);
   const dataStar = await responseStar.json();
   // console.log(dataStar);
   const dataVideos = await responseVideos.json();
@@ -84,12 +84,12 @@ export default async function page1({
   // });
   // console.log(trailerWeNeed);
   const trailer = await trailerData.json();
-  console.log(trailer);
+  // console.log(trailer);
 
   const trailerUse = trailer.results.find((video: Trailer) => {
     return video.type === "Trailer";
   });
-  console.log(trailerData);
+  // console.log(trailerData);
   const durationHour = data.runtime / 60;
   const durition = data.runtime % 60;
   const voteCount = data.vote_count / 1000;
@@ -194,7 +194,7 @@ export default async function page1({
             .slice(0, 5)
             .map((movie: MovieType, id: number) => {
               return (
-                <Card key={id}>
+                <Link href={`/details/${movie.id}`} key={id}>
                   <div>
                     <div>
                       <Image
@@ -212,7 +212,7 @@ export default async function page1({
                       <h2 className="text-[18px]">{movie.original_title}</h2>
                     </div>
                   </div>
-                </Card>
+                </Link>
               );
             })}
         </div>
