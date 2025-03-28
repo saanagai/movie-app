@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { TOKEN } from "@/app/util/constant";
 import { createdType } from "@/app/util/createdType";
 import { genreType } from "@/app/util/genreType";
@@ -14,11 +15,8 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
-export default async function page1({
-  params: { movieId },
-}: {
-  params: { movieId: string };
-}) {
+const Page1 = async ({ params }: any) => {
+  const movieId = params.movieId;
   const response = await fetch(
     `https://api.themoviedb.org/3/movie/${movieId}?language=en-US`,
     {
@@ -216,4 +214,6 @@ export default async function page1({
       </div>
     </div>
   );
-}
+};
+
+export default Page1;

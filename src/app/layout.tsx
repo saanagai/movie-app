@@ -5,6 +5,7 @@ import "./globals.css";
 import { Header } from "./_components/Header";
 import { FooterContent } from "./_components/FooterContent";
 import { ThemeProvider } from "./_components/ThemeProvider";
+import { Suspense } from "react";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({
@@ -29,9 +30,11 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Header />
-          {children}
-          <FooterContent />
+          <Suspense>
+            <Header />
+            {children}
+            <FooterContent />
+          </Suspense>
         </ThemeProvider>
       </body>
     </html>
