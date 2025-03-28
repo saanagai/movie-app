@@ -9,7 +9,7 @@ import {
 import { ChevronDown, ChevronRight } from "lucide-react";
 import { TOKEN } from "../util/constant";
 import { genreType } from "../util/genreType";
-import { MovieType } from "../util/types";
+
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";

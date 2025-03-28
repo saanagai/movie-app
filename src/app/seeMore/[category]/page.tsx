@@ -4,7 +4,7 @@ import { MovieType } from "@/app/util/types";
 import Image from "next/image";
 import Link from "next/link";
 
-export default async function (props: {
+export default async function Page(props: {
   params: Promise<{ category: string }>;
 }) {
   const { category } = await props.params;
@@ -23,7 +23,7 @@ export default async function (props: {
     <div>
       <p className="text-foreground text-2xl font-semibold mb-5">{category}</p>
       <div className="grid grid-cols-5 gap-[32px] max-w-[1440px]">
-        {data.results?.slice(0, 20).map((d: MovieType, index: number) => {
+        {data.results?.slice(0, 20).map((d: MovieType) => {
           return (
             <Link
               href={`/details/${d.id}`}

@@ -1,8 +1,7 @@
 "use client";
-import { Play, PlayIcon } from "lucide-react";
+import { PlayIcon } from "lucide-react";
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogTitle,
   DialogTrigger,
@@ -10,7 +9,6 @@ import {
 import { TOKEN } from "../util/constant";
 import { Trailer } from "../util/trailerType";
 import { useEffect, useState } from "react";
-import { MovieType } from "../util/types";
 import { Button } from "@/components/ui/button";
 
 export function WatchTrailer({ movieId }: { movieId: number }) {

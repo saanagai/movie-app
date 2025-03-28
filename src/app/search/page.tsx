@@ -2,17 +2,14 @@
 
 import { MovieType } from "@/app/util/types";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
-import Image from "next/image";
-import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { genreType } from "../util/genreType";
 import { ChevronRight } from "lucide-react";
 import { useEffect, useState } from "react";
-import { TOKEN } from "../util/constant";
 import { useRouter } from "next/navigation";
 import { SearchCards } from "../_components/SearchCards";
 import { fetchdata } from "../util/inputData";
-const Page = (props: { params: Promise<{ category: string }> }) => {
+const Page = () => {
   // const { category } = await props.params;
   const searchParams = useSearchParams();
   const search = searchParams.get("value");

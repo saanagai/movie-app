@@ -23,7 +23,7 @@ const Page = async (props: { params: Promise<{ category: string }> }) => {
         More This Like
       </p>
       <div className="grid grid-cols-5 gap-[32px] max-w-[1440px]">
-        {data.results?.slice(0, 20).map((d: MovieType, index: number) => {
+        {data.results?.slice(0, 20).map((d: MovieType) => {
           return (
             <Link
               href={`/details/${d.id}`}
@@ -44,9 +44,8 @@ const Page = async (props: { params: Promise<{ category: string }> }) => {
                   <img src="/star.svg" alt="" />
                   <p>
                     <span className="text-[14px] font-bold">
-                      {" "}
                       {d.vote_average?.toFixed(1)}
-                    </span>{" "}
+                    </span>
                     /10
                   </p>
                 </div>

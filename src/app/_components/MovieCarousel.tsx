@@ -13,8 +13,6 @@ import {
 import Image from "next/image";
 import { WatchTrailer } from "./WatchTrailer";
 import { TOKEN } from "../util/constant";
-import { Button } from "@/components/ui/button";
-
 export function MovieCarousel() {
   const [data, setData] = useState<MovieType[] | null>(null);
 

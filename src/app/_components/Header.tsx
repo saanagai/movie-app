@@ -1,6 +1,5 @@
 import { Genre } from "./Genre";
 import Image from "next/image";
-import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import ThemeChanger from "./ThemeChanger";
 import SearchTyping from "./SearchTyping";

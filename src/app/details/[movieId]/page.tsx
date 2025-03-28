@@ -4,15 +4,12 @@ import { genreType } from "@/app/util/genreType";
 import { Trailer } from "@/app/util/trailerType";
 import { MovieType } from "@/app/util/types";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { ArrowRight, PlayIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
-  DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
@@ -40,15 +37,15 @@ export default async function page1({
       },
     }
   );
-  const responseVideos = await fetch(
-    `https://api.themoviedb.org/3/movie/${movieId}/videos?language=en-US`,
-    {
-      headers: {
-        Authorization: `Bearer ${TOKEN}`,
-        "Content-type": "application/json",
-      },
-    }
-  );
+  // const responseVideos = await fetch(
+  //   `https://api.themoviedb.org/3/movie/${movieId}/videos?language=en-US`,
+  //   {
+  //     headers: {
+  //       Authorization: `Bearer ${TOKEN}`,
+  //       "Content-type": "application/json",
+  //     },
+  //   }
+  // );
   const similarData = await fetch(
     ` https://api.themoviedb.org/3/movie/${movieId}/similar?language=en-US&page=1`,
     {
@@ -72,7 +69,7 @@ export default async function page1({
   // console.log(data);
   const dataStar = await responseStar.json();
   // console.log(dataStar);
-  const dataVideos = await responseVideos.json();
+  // const dataVideos = await responseVideos.json();
   // console.log(dataVideos);
   const dataSimilar = await similarData.json();
   // console.log(similarData);
@@ -90,9 +87,9 @@ export default async function page1({
     return video.type === "Trailer";
   });
   // console.log(trailerData);
-  const durationHour = data.runtime / 60;
-  const durition = data.runtime % 60;
-  const voteCount = data.vote_count / 1000;
+  // const durationHour = data.runtime / 60;
+  // const durition = data.runtime % 60;
+  // const voteCount = data.vote_count / 1000;
 
   return (
     <div className="max-w-[1280px] m-auto">

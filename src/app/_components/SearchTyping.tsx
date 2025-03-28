@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { Card } from "@/components/ui/card";
 
@@ -11,15 +11,15 @@ import { useRouter } from "next/navigation";
 
 export default function SearchTyping() {
   const [search, setSearch] = useState("");
-  const [searchValue, setSearchValue] = useState("");
+  // const [searchValue, setSearchValue] = useState("");
   const [value, setValue] = useState([]);
-  const [isPopupVisible, setIsPopupVisible] = useState(false);
-  const popupRef = useRef<HTMLDivElement>(null);
+  // const [isPopupVisible, setIsPopupVisible] = useState(false);
+  // const popupRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
   const handleSeeAllResults = () => {
-    router.push(`/search?query=${encodeURIComponent(searchValue)}&page=1`);
-    setIsPopupVisible(false);
+    router.push(`/search?query=${encodeURIComponent(search)}&page=1`);
+    // setIsPopupVisible(false);
   };
 
   const addHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -67,6 +67,7 @@ export default function SearchTyping() {
             return (
               // <div key={index} className=" w-full">
               <Link
+                key={index}
                 href={`/details/${movie.id}`}
                 onClick={() => clickHandler()}
               >
@@ -104,7 +105,7 @@ export default function SearchTyping() {
             className="rounded-[2px] cursor-pointer w-[100%] p-0"
           >
             <Card className="h-[34px] w-[100%] rounded-[6px] flex items-center justify-center">
-              See all results for " {search} "
+              See all results for&#34;{search}&#34;
             </Card>
           </Button>
 

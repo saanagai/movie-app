@@ -15,7 +15,7 @@ export async function UpcomingSee() {
     }
   );
   const data = await asd.json();
-  // console.log(data);
+  console.log(data);
   return (
     <div className="w-[1280px] m-auto">
       <div className="flex justify-between m-auto w-[1280px]">

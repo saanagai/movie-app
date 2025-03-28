@@ -7,7 +7,6 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ChevronRight } from "lucide-react";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
-import { Pagination } from "@/components/ui/pagination";
 import { genreType } from "../util/genreType";
 import { TOKEN } from "../util/constant";
 

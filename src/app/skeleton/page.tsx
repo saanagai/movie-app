@@ -1,3 +1,5 @@
+import Loading from "../details/[movieId]/loading";
+
 const page = () => {
   return (
     <div>
